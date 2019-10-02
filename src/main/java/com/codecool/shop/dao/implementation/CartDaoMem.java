@@ -4,6 +4,7 @@ import com.codecool.shop.model.LineItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CartDaoMem {
     private static CartDaoMem instance;
@@ -28,7 +29,13 @@ public class CartDaoMem {
     }
 
     public List<LineItem> getAll() {
+        removeNullQuantityLineItems();
         return lineItems;
+    }
+
+    //TODO Talán ez a baj ha van.
+    private void removeNullQuantityLineItems() {
+        lineItems.removeAll(lineItems.stream().filter(lineItem -> lineItem.getQuantity() <= 0).collect(Collectors.toList()));
     }
 
     public LineItem getLineItemByProductIdIfExists(int productId) {
