@@ -2,9 +2,11 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProductCategoryDaoMem implements ProductCategoryDao {
@@ -43,5 +45,14 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     @Override
     public List<ProductCategory> getAll() {
         return data;
+    }
+
+    public HashMap<ProductCategory, List<Product>> getProductCategoryMap (){
+        HashMap<ProductCategory, List<Product>> productCategoryMap = new HashMap<>();
+        List <ProductCategory> ProductCategories = getAll();
+        for (ProductCategory productCategory : ProductCategories) {
+            productCategoryMap.put(productCategory, productCategory.getProducts());
+        }
+        return productCategoryMap;
     }
 }
