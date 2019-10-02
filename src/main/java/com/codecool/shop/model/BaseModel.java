@@ -1,6 +1,8 @@
 package com.codecool.shop.model;
 
 
+import com.codecool.shop.dao.implementation.CartDaoMem;
+
 import java.lang.reflect.Field;
 
 public class BaseModel {
@@ -8,6 +10,7 @@ public class BaseModel {
     protected int id;
     protected String name;
     protected String description;
+
 
     public BaseModel(String name) {
         this.name = name;
