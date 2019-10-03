@@ -60,6 +60,16 @@
 {
     margin: 0 0 11px;
 }
+/*sidenav*/
+#menu-opener{
+    position: absolute;
+    top:10px;
+    left: 10px;
+}
+
+#cart_size {
+    padding-right: 5px;
+}
 
 #cart_size {
     padding-right: 5px;
