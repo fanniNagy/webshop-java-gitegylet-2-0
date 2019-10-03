@@ -7,6 +7,7 @@
 </head>
 <body>
 <div th:fragment="content">
+    <script defer type="text/javascript" src="static/js/add-to-cart.js"></script>
     <div class="icons">
         <a class="btn btn-success" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
     </div>
@@ -16,7 +17,7 @@
         </div>
         <div id="products" class="row">
             <div class="col col-sm-12 col-md-6 col-lg-4" th:each="product : ${categoryProducts.getValue()}">
-                <div class="card" th:object="${product}">
+                <div class="card" th:object="${product}" th:data-id="${product.id}">
                     <img class="" src="http://placehold.it/400x250/000/fff"
                          th:attr="src='/static/img/product_' + *{id} + '.jpg'" alt=""/>
                     <div class="card-header">
