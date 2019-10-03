@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,5 +32,15 @@ public class AddToCartController extends HttpServlet {
         } else {
             CartDaoMem.getInstance().add(new LineItem(ProductDaoMem.getInstance().find(id)));
         }
+
+        JsonObject jsonResponse = new JsonObject();
+        jsonResponse.addProperty("cartSize", CartDaoMem.getInstance().getAll().stream().mapToInt(LineItem::getQuantity).sum());
+
+
+        PrintWriter out = resp.getWriter();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        out.print(jsonResponse.toString());
+        out.flush();
     }
 }

@@ -9,7 +9,7 @@
 <div th:fragment="content">
     <script defer type="text/javascript" src="static/js/add-to-cart.js"></script>
     <div class="icons">
-        <a class="btn btn-success" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
+        <a class="btn btn-success" th:href="@{/cart}"><span id="cart_size"></span><i class="fas fa-cart-arrow-down"></i></a>
     </div>
     <div class="card">
         <a th:href="@{/list}"> See all products</a>
