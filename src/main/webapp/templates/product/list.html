@@ -8,15 +8,15 @@
 <body>
 <div th:fragment="content">
     <script defer type="text/javascript" src="static/js/add-to-cart.js"></script>
-    <div class="icons">
+    <div class="icons" id="cart_button">
         <a class="btn btn-success" th:href="@{/cart}"><span id="cart_size"></span><i class="fas fa-cart-arrow-down"></i></a>
     </div>
-    <div class="category" th:each="categoryProducts :${categorymap}">
+    <div class="category" id="category" th:each="categoryProducts :${categorymap}">
         <div class="card">
             <strong th:text="${categoryProducts.getKey().name}">Category Title</strong>
         </div>
         <div id="products" class="row">
-            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="product : ${categoryProducts.getValue()}">
+            <div class="col col-sm-12 col-md-6 col-lg-4"  th:each="product : ${categoryProducts.getValue()}">
                 <div class="card" th:object="${product}" th:data-id="${product.id}">
                     <img class="" src="http://placehold.it/400x250/000/fff"
                          th:attr="src='/static/img/product_' + *{id} + '.jpg'" alt=""/>

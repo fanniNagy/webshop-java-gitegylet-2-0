@@ -8,15 +8,12 @@
 <body>
 <div th:fragment="content">
     <script defer type="text/javascript" src="static/js/add-to-cart.js"></script>
-    <div class="icons">
-        <a class="btn btn-success" th:href="@{/cart}"><span id="cart_size"></span><i class="fas fa-cart-arrow-down"></i></a>
-    </div>
-    <div class="card">
-        <a th:href="@{/list}"> See all products</a>
-    </div>
-    <div class="card">
+    <a id="cart_button"  class="btn btn-success" th:href="@{/cart}"><span id="cart_size"></span><i class="fas fa-cart-arrow-down"></i></a>
+    <a id="all_button" class="btn btn-success" th:href="@{/list}"><i class="fas fa-reply-all"></i></a>
+
+<!--    <div class="card" id="category">
         <strong th:text="${category.name}">Category Title</strong>
-    </div>
+    </div>-->
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card" th:data-id="${prod.id}">

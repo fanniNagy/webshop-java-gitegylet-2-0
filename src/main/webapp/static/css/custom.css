@@ -78,3 +78,22 @@
 .quantity div{
     display: inline-block !important;
 }
+
+img {
+    width: 100%;
+}
+
+#cart_button {
+    padding-left: 10px;
+    margin: 5px;
+}
+
+#category {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 0;
+}
+
+#all_button {
+    float: right;
+}
