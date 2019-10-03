@@ -29,10 +29,29 @@
     <script src="https://kit.fontawesome.com/f8c59d8da2.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-    <script type="text/javascript" src="static/js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/sidenav.css"/>
+    <script type="text/javascript" src="static/js/filter.js" defer></script>
+    <script type="text/javascript" src="static/js/script.js" defer></script>
+    <script type="text/javascript" src="static/js/sidenav.js" defer></script>
+<!-- Fontawesome kit-->
+    <script src="https://kit.fontawesome.com/c6f92af04b.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
+<span onclick="openNav()"><i class="fas fa-bars" id="menu-opener"></i></span>
+
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <h2 class="type-title">Categories</h2>
+    <a href="/filter?filter-by=category&filter-value=1">Tablet</a>
+    <a href="/filter?filter-by=category&filter-value=2">Wand</a>
+    <h2 class="type-title">Suppliers</h2>
+    <a href="/filter?filter-by=supplier&filter-value=2">Lenovo</a>
+    <a href="/filter?filter-by=supplier&filter-value=1">Amazon</a>
+    <a href="/filter?filter-by=supplier&filter-value=3">Olivander</a>
+</div>
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
