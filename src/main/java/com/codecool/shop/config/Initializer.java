@@ -35,17 +35,17 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(olivander);
 
 
-
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         tablet.setId(1);
         productCategoryDataStore.add(tablet);
-        ProductCategory wand = new ProductCategory("Wand", "Magic", "This is a vand");
+        ProductCategory wand = new ProductCategory("Wand", "Magic", "This is a wand");
         wand.setId(2);
         productCategoryDataStore.add(wand);
         ProductCategory smartPhone = new ProductCategory("Smartphone", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         smartPhone.setId(3);
         productCategoryDataStore.add(smartPhone);
+
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
