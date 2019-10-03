@@ -34,7 +34,7 @@ public class CartDaoMem {
     }
 
     //TODO Talán ez a baj ha van.
-    private void removeNullQuantityLineItems() {
+    public void removeNullQuantityLineItems() {
         lineItems.removeAll(lineItems.stream().filter(lineItem -> lineItem.getQuantity() <= 0).collect(Collectors.toList()));
     }
 

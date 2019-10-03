@@ -17,7 +17,11 @@ public class GetCartSize extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         JsonObject jsonResponse = new JsonObject();
-        jsonResponse.addProperty("cartSize", CartDaoMem.getInstance().getAll().stream().mapToInt(LineItem::getQuantity).sum());
+        jsonResponse.addProperty("cartSize", CartDaoMem.getInstance()
+                .getAll()
+                .stream()
+                .mapToInt(LineItem::getQuantity)
+                .sum());
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
