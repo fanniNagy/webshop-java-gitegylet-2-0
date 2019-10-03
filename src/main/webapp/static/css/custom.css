@@ -70,3 +70,11 @@
 #cart_size {
     padding-right: 5px;
 }
+
+#cart_size {
+    padding-right: 5px;
+}
+
+.quantity div{
+    display: inline-block !important;
+}
