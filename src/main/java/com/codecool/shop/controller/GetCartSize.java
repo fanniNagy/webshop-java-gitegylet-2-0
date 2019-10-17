@@ -1,5 +1,7 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.DaoFactory;
 import com.codecool.shop.dao.implementation.mem.CartDaoMem;
 import com.codecool.shop.model.LineItem;
 import com.google.gson.JsonObject;
@@ -16,8 +18,10 @@ import java.io.PrintWriter;
 public class GetCartSize extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CartDao cartDao = DaoFactory.getCartDao();
+
         JsonObject jsonResponse = new JsonObject();
-        jsonResponse.addProperty("cartSize", CartDaoMem.getInstance()
+        jsonResponse.addProperty("cartSize",cartDao
                 .getAll()
                 .stream()
                 .mapToInt(LineItem::getQuantity)

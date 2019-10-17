@@ -1,5 +1,8 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.DaoFactory;
+import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.mem.CartDaoMem;
 import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import com.codecool.shop.model.LineItem;
@@ -20,26 +23,29 @@ import java.util.stream.Collectors;
 public class RemoveFromCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CartDao cartDao = DaoFactory.getCartDao();
+        ProductDao productDao = DaoFactory.getProductDao();
+
         String JSONstring = req.getReader()
                 .lines()
                 .collect(Collectors.joining(System.lineSeparator()));
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(JSONstring, JsonObject.class);
         int id = jsonObject.getAsJsonPrimitive("id").getAsInt();
-        LineItem lineItem = CartDaoMem.getInstance().getLineItemByProductIdIfExists(id);
+        LineItem lineItem = cartDao.getLineItemByProductIdIfExists(id);
         if(lineItem != null) {
             if(lineItem.getQuantity() > 1) {
                 lineItem.decreaseQuantity();
             } else {
                 lineItem.decreaseQuantity();
-                CartDaoMem.getInstance().removeNullQuantityLineItems();
+                cartDao.removeNullQuantityLineItems();
             }
         } else {
-            CartDaoMem.getInstance().add(new LineItem(ProductDaoMem.getInstance().find(id)));
+            cartDao.add(new LineItem(productDao.find(id)));
         }
 
         JsonObject jsonResponse = new JsonObject();
-        jsonResponse.addProperty("cartSize", CartDaoMem.getInstance()
+        jsonResponse.addProperty("cartSize", cartDao
                 .getAll()
                 .stream()
                 .mapToInt(LineItem::getQuantity)
