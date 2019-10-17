@@ -50,6 +50,7 @@ function handle_remove_from_cart(event) {
                 .parentElement.removeChild(quantityDiv.closest(".card").parentElement);
         }
     })
+    
 }
 
 window.onload = init;
