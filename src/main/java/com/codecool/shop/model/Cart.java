@@ -1,24 +1,12 @@
-package com.codecool.shop.dao.implementation;
-
-import com.codecool.shop.model.LineItem;
+package com.codecool.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CartDaoMem {
-    private static CartDaoMem instance;
+public class Cart {
+
     private List<LineItem> lineItems = new ArrayList<>();
-
-    private CartDaoMem() {
-    }
-
-    public static CartDaoMem getInstance() {
-        if (instance == null) {
-            instance = new CartDaoMem();
-        }
-        return instance;
-    }
 
     public void empty() {
         lineItems.clear();

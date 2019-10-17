@@ -1,6 +1,6 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.dao.implementation.mem.CartDaoMem;
 
 public class Order {
     final int orderId;
