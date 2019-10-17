@@ -6,7 +6,7 @@ import com.codecool.shop.model.Order;
 
 import java.util.List;
 
-public interface OrderDao {
+public interface OrderDao extends Dao {
     void add(Order order);
     Order find(int id);
     void remove(int id);

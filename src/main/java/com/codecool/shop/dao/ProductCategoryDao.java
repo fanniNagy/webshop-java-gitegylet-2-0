@@ -6,7 +6,7 @@ import com.codecool.shop.model.ProductCategory;
 import java.util.HashMap;
 import java.util.List;
 
-public interface ProductCategoryDao {
+public interface ProductCategoryDao extends Dao {
 
     void add(ProductCategory category);
     ProductCategory find(int id);
