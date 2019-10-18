@@ -1,8 +1,14 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import lombok.Cleanup;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
@@ -25,6 +31,15 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
 
     @Override
     public Supplier find(int id) {
+        try {
+            @Cleanup Connection conn = this.getConnection();
+            @Cleanup PreparedStatement statement = conn.prepareStatement("SELECT * FROM supplier WHERE id=?");
+            statement.setInt(1,id);
+            @Cleanup ResultSet resultSet = statement.executeQuery();
+            return new Supplier(resultSet.getString("name"), resultSet.getString("description"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
