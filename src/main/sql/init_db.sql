@@ -307,3 +307,6 @@ INSERT INTO public.product
 VALUES ('The Cloak of Invisibility',
         'The Cloak of Invisibility is a magical artefact used to render the wearer invisible, and one of the fabled Deathly Hallows.',
         3, 4, 'GAL', 100, 'cloak.jpg');
+
+INSERT INTO public."user"(name, password, email)VALUES ('admin', 'admin', 'admin@codecoolshop.bp');
+INSERT INTO public.cart(user_id)VALUES (1);
