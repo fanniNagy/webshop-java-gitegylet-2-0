@@ -61,10 +61,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
     public List<Product> getBy(Supplier supplier) {
         List<Product> result = new ArrayList<>();
         try{
-            Connection connection = this.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE supplier_id= ?");
+            @Cleanup Connection connection = this.getConnection();
+            @Cleanup PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE supplier_id= ?");
             statement.setInt(1, supplier.getId());
-            ResultSet resultSet = statement.executeQuery();
+            @Cleanup ResultSet resultSet = statement.executeQuery();
             while (!resultSet.next()) {
                 String name = resultSet.getString("name");
                 Float defaultPrice = resultSet.getFloat("default_price");
@@ -86,10 +86,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
     public List<Product> getBy(ProductCategory productCategory) {
         List<Product> result = new ArrayList<>();
         try{
-            Connection connection = this.getConnection();
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE product_category_id= ?");
+            @Cleanup Connection connection = this.getConnection();
+            @Cleanup PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE product_category_id= ?");
             statement.setInt(1, productCategory.getId());
-            ResultSet resultSet = statement.executeQuery();
+            @Cleanup ResultSet resultSet = statement.executeQuery();
             while (!resultSet.next()) {
                 String name = resultSet.getString("name");
                 Float defaultPrice = resultSet.getFloat("default_price");

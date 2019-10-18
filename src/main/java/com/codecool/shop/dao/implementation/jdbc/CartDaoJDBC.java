@@ -92,10 +92,10 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
     @Override
     public LineItem getLineItemByProductIdIfExists(int productId) {
         try {
-            Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM line_item WHERE product_id = ?");
+            @Cleanup Connection conn = this.getConnection();
+            @Cleanup PreparedStatement stmt = conn.prepareStatement("SELECT * FROM line_item WHERE product_id = ?");
             stmt.setInt(1, productId);
-            ResultSet resultSet = stmt.executeQuery();
+            @Cleanup ResultSet resultSet = stmt.executeQuery();
 
             if (!resultSet.next()) {
                 return null;
@@ -114,8 +114,8 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
     @Override
     public void removeNullQuantityLineItems() {
         try {
-            Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM public.line_item WHERE quantity <= 0");
+            @Cleanup Connection conn = this.getConnection();
+            @Cleanup PreparedStatement stmt = conn.prepareStatement("DELETE FROM public.line_item WHERE quantity <= 0");
             stmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();

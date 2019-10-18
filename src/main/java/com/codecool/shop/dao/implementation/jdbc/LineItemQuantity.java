@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
 import com.codecool.shop.model.LineItem;
+import lombok.Cleanup;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +22,8 @@ public class LineItemQuantity extends DaoJDBC {
 
     public void increaseQuantity(int productId) {
         try {
-            Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE line_item SET quantity = quantity + 1 WHERE product_id = ?");
+            @Cleanup Connection conn = this.getConnection();
+            @Cleanup PreparedStatement stmt = conn.prepareStatement("UPDATE line_item SET quantity = quantity + 1 WHERE product_id = ?");
             stmt.setInt(1, productId);
             stmt.execute();
         } catch (SQLException e) {
@@ -32,8 +33,8 @@ public class LineItemQuantity extends DaoJDBC {
 
     public void decreaseQuantity(int productId) {
         try {
-            Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement("UPDATE line_item SET quantity = quantity - 1 WHERE product_id = ?");
+            @Cleanup Connection conn = this.getConnection();
+            @Cleanup PreparedStatement stmt = conn.prepareStatement("UPDATE line_item SET quantity = quantity - 1 WHERE product_id = ?");
             stmt.setInt(1, productId);
             stmt.execute();
         } catch (SQLException e) {
