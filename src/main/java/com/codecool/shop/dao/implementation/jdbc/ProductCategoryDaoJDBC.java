@@ -1,9 +1,15 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.dao.DaoFactory;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import lombok.Cleanup;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +34,15 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
 
     @Override
     public ProductCategory find(int id) {
+        try {
+            @Cleanup Connection conn = this.getConnection();
+            @Cleanup PreparedStatement statement = conn.prepareStatement("SELECT * FROM category WHERE id=?");
+            statement.setInt(1,id);
+            @Cleanup ResultSet resultSet = statement.executeQuery();
+            return new ProductCategory(resultSet.getString("name"), resultSet.getString("department"), resultSet.getString("description"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
