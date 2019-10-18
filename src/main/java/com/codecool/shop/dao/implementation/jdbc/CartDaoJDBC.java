@@ -3,10 +3,7 @@ package com.codecool.shop.dao.implementation.jdbc;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DaoFactory;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.LineItem;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.User;
+import com.codecool.shop.model.*;
 import lombok.Cleanup;
 
 import java.sql.*;
@@ -28,28 +25,32 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
 
     @Override
     public void add(LineItem lineItem) {
-        @Cleanup Connection conn = this.getConnection();
-        int productId = lineItem.getProduct().getId();
+        try {
+            @Cleanup Connection conn = this.getConnection();
+            int productId = lineItem.getProduct().getId();
 
-        if (this.getLineItemByProductIdIfExists(productId) != null) {
-            try {
-                @Cleanup Statement cs = conn.createStatement();
+            if (this.getLineItemByProductIdIfExists(productId) != null) {
+                try {
+                    @Cleanup Statement cs = conn.createStatement();
 
-                String sql = "UPDATE Line_item SET quantity = quantity + 1 WHERE product_id =" + productId;
-                cs.execute(sql);
-            } catch (SQLException e) {
-                e.printStackTrace();
+                    String sql = "UPDATE Line_item SET quantity = quantity + 1 WHERE product_id =" + productId;
+                    cs.execute(sql);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    @Cleanup Statement cs = conn.createStatement();
+                    String sql = "INSERT INTO Line_item(\n" +
+                            "\tproduct_id, quantity, cart_id)\n" +
+                            "\tVALUES ("+ productId +", 1, 1);";
+                    cs.execute(sql);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-        } else {
-            try {
-                @Cleanup Statement cs = conn.createStatement();
-                String sql = "INSERT INTO Line_item(\n" +
-                        "\tproduct_id, quantity, cart_id)\n" +
-                        "\tVALUES ("+ productId +", 1, 1);";
-                cs.execute(sql);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -90,12 +91,34 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
 
     @Override
     public LineItem getLineItemByProductIdIfExists(int productId) {
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM line_item WHERE product_id = ?");
+            stmt.setInt(1, productId);
+            ResultSet resultSet = stmt.executeQuery();
 
+            if (!resultSet.next()) {
+                return null;
+            } else {
+                Product product = ProductDaoJDBC.getInstance().find(productId);
+                LineItem lineItem = new LineItem(product);
+                lineItem.setQuantity(resultSet.getInt("quantity"));
+                return lineItem;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void removeNullQuantityLineItems() {
-
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM public.line_item WHERE quantity <= 0");
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

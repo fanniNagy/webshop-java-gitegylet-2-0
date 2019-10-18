@@ -58,6 +58,12 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
 
     @Override
     public HashMap<ProductCategory, List<Product>> getProductCategoryMap() {
-        return null;
+        HashMap<ProductCategory, List<Product>> productCategoryMap = new HashMap<>();
+        List <ProductCategory> ProductCategories = getAll();
+        for (ProductCategory productCategory : ProductCategories) {
+            productCategoryMap.put(productCategory, productCategory.getProducts());
+        }
+        return productCategoryMap;
     }
+
 }

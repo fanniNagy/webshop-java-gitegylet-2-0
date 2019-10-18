@@ -1,5 +1,7 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.dao.implementation.jdbc.LineItemQuantity;
+
 public class LineItem {
     private Product product;
     private int quantity;
@@ -11,10 +13,12 @@ public class LineItem {
 
     public void increaseQuantity() {
         this.quantity++;
+        LineItemQuantity.getInstance().increaseQuantity(product.id);
     }
 
-    public int decreaseQuantity() {
-       return --this.quantity;
+    public void decreaseQuantity() {
+        this.quantity--;
+        LineItemQuantity.getInstance().decreaseQuantity(product.id);
     }
 
     public Product getProduct() {
@@ -23,5 +27,9 @@ public class LineItem {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
