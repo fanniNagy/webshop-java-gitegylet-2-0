@@ -262,51 +262,51 @@ VALUES ('Deathly hallows',
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
-VALUES ('Your wand', 'It already chose you', 1, 2, 'GAL', 10, 'yourWand.jpg');
+VALUES ('Your wand', 'It already chose you', 1, 2, 'GAL', 10, 'product_1.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('Wildfire Whiz-bang',
         'You’ll know these as the huge, showy fireworks that announced Fred and George’s departure from Hogwarts. They are a cacophony of chaos: a series of pyrotechnics that includes a shocking-pink catherine wheel, rockets with long tails of silver stars, sparklers that spell out swear words and an immense, fire-breathing dragon.',
-        2, 1, 'GAL', 4, 'wildfire.jpg');
+        2, 1, 'GAL', 4, 'product_2.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('Portable Swamp', 'A product which, once activated, floods the area with grim, swampy water.', 2, 1, 'GAL', 6,
-        'swamp.jpg');
+        'product_3.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('Love potion',
         'Only last for 24 hours, but the fact that these are allowed in the wizarding world at all is pretty unexpected. Suddenly, the likes of Romilda Vane were spiking Chocolate Cauldrons all over the place at Hogwarts.',
-        2, 3, 'GAL', 7, 'lovePotion.jpg');
+        2, 3, 'GAL', 7, 'product_4.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('Peruvian Instant Darkness Powder', 'Reates impenetrable darkness wherever it’s thrown.', 2, 2, 'GAL', 7,
-        'powder.jpg');
+        'product_5.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('Extendable Ear', 'Weasleys’ Wizard Wheezes also encourages snooping on other wizards, with Extendable Ears.',
-        2, 1, 'GAL', 5, 'ear.jpg');
+        2, 1, 'GAL', 5, 'product_6.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('The Elder Wand', 'The Elder Wand is one of three objects that make up the fabled Deathly Hallows.', 3, 4,
-        'GAL', 100, 'elder.jpg');
+        'GAL', 100, 'product_7.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('The Resurrection Stone',
         'According to legend, whoever reunited it with the other two Hallows (the Elder Wand and the Cloak of Invisibility) would become the Master of Death.',
-        3, 4, 'GAL', 100, 'stone.jpg');
+        3, 4, 'GAL', 100, 'product_8.jpg');
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
 VALUES ('The Cloak of Invisibility',
         'The Cloak of Invisibility is a magical artefact used to render the wearer invisible, and one of the fabled Deathly Hallows.',
-        3, 4, 'GAL', 100, 'cloak.jpg');
+        3, 4, 'GAL', 100, 'product_9.jpg');
 
 INSERT INTO public."user"(name, password, email)VALUES ('admin', 'admin', 'admin@codecoolshop.bp');
 INSERT INTO public.cart(user_id)VALUES (1);

@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
+import com.codecool.shop.dao.DaoFactory;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
@@ -38,9 +39,17 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
         try {
             @Cleanup Connection conn = this.getConnection();
             @Cleanup PreparedStatement statement = conn.prepareStatement("SELECT * FROM product WHERE id=?");
-            statement.setInt(1,id);
+            statement.setInt(1, id);
             @Cleanup ResultSet resultSet = statement.executeQuery();
-            return new Product(resultSet.getString("name"),resultSet.getFloat("default_price"), resultSet.getString("default_currency"), resultSet.getString("description"), ProductCategoryDaoJDBC.getInstance().find(resultSet.getInt("product_category_id")), SupplierDaoJDBC.getInstance().find(resultSet.getInt("supplier_id")));
+            resultSet.next();
+            Product product = new Product(  resultSet.getString("name"),
+                                            resultSet.getFloat("default_price"),
+                                            resultSet.getString("default_currency"),
+                                            resultSet.getString("description"),
+                                            ProductCategoryDaoJDBC.getInstance().find(resultSet.getInt("product_category_id")),
+                                            SupplierDaoJDBC.getInstance().find(resultSet.getInt("supplier_id")));
+            product.setId(id);
+            return product;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,7 +69,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
     @Override
     public List<Product> getBy(Supplier supplier) {
         List<Product> result = new ArrayList<>();
-        try{
+        try {
             @Cleanup Connection connection = this.getConnection();
             @Cleanup PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE supplier_id= ?");
             statement.setInt(1, supplier.getId());
@@ -76,7 +85,7 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 result.add(product);
             }
             return result;
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -85,22 +94,26 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         List<Product> result = new ArrayList<>();
-        try{
+        try {
             @Cleanup Connection connection = this.getConnection();
             @Cleanup PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE product_category_id= ?");
             statement.setInt(1, productCategory.getId());
             @Cleanup ResultSet resultSet = statement.executeQuery();
-            while (!resultSet.next()) {
-                String name = resultSet.getString("name");
+            ProductDao productDao = DaoFactory.getProductDao();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Product product = productDao.find(id);
+                result.add(product);
+               /* String name = resultSet.getString("name");
                 Float defaultPrice = resultSet.getFloat("default_price");
                 String currencyString = resultSet.getString("default_currency");
                 String description = resultSet.getString("description");
                 Supplier supplier = new Supplier(resultSet.getString("name"), resultSet.getString("description"));
                 Product product = new Product(name, defaultPrice, currencyString, description, productCategory, supplier);
-                result.add(product);
+                result.add(product);*/
             }
             return result;
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;

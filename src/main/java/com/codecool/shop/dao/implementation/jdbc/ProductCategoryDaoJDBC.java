@@ -39,7 +39,10 @@ public class ProductCategoryDaoJDBC extends DaoJDBC implements ProductCategoryDa
             @Cleanup PreparedStatement statement = conn.prepareStatement("SELECT * FROM category WHERE id=?");
             statement.setInt(1,id);
             @Cleanup ResultSet resultSet = statement.executeQuery();
-            return new ProductCategory(resultSet.getString("name"), resultSet.getString("department"), resultSet.getString("description"));
+            resultSet.next();
+            ProductCategory productCategory = new ProductCategory(resultSet.getString("name"), resultSet.getString("department"), resultSet.getString("description"));
+            productCategory.setId(id);
+            return productCategory;
         } catch (SQLException e) {
             e.printStackTrace();
         }

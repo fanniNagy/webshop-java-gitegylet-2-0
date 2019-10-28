@@ -36,7 +36,10 @@ public class SupplierDaoJDBC extends DaoJDBC implements SupplierDao {
             @Cleanup PreparedStatement statement = conn.prepareStatement("SELECT * FROM supplier WHERE id=?");
             statement.setInt(1,id);
             @Cleanup ResultSet resultSet = statement.executeQuery();
-            return new Supplier(resultSet.getString("name"), resultSet.getString("description"));
+            resultSet.next();
+            Supplier supplier = new Supplier(resultSet.getString("name"), resultSet.getString("description"));
+            supplier.setId(id);
+            return supplier;
         } catch (SQLException e) {
             e.printStackTrace();
         }

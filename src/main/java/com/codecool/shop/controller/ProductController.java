@@ -6,6 +6,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.model.ProductCategory;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -26,13 +27,9 @@ public class ProductController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("category", productCategoryDao.find(1));
-        context.setVariable("products", productDao.getBy(productCategoryDao.find(1)));
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
+        ProductCategory productCategory = productCategoryDao.find(1);
+        context.setVariable("category", productCategory);
+        context.setVariable("products", productDao.getBy(productCategory));
         engine.process("product/index.html", context, resp.getWriter());
     }
 
