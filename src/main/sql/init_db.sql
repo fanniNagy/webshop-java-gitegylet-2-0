@@ -233,7 +233,7 @@ VALUES ('Olivander',
 
 INSERT INTO public.supplier
     (name, description)
-VALUES ('Weasleys’ Wizard Wheezes',
+VALUES ('Weasleys Wizard Wheezes',
         'Look, we love a good joke more than anyone else. What sort of cereal do they serve at Hogwarts? Hufflepuffs! Why did Severus Snape stand in the middle of the road? So you’d never know what side he’s on! See? We know how to have a good time.');
 
 INSERT INTO public.supplier
@@ -288,7 +288,7 @@ VALUES ('Peruvian Instant Darkness Powder', 'Reates impenetrable darkness wherev
 
 INSERT INTO public.product
 (name, description, supplier_id, product_category_id, default_currency, default_price, image_url)
-VALUES ('Extendable Ear', 'Weasleys’ Wizard Wheezes also encourages snooping on other wizards, with Extendable Ears.',
+VALUES ('Extendable Ear', 'Weasleys Wizard Wheezes also encourages snooping on other wizards, with Extendable Ears.',
         2, 1, 'GAL', 5, 'product_6.jpg');
 
 INSERT INTO public.product

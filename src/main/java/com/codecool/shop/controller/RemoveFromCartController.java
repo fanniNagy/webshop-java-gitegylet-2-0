@@ -1,8 +1,6 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoFactory;
-import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.mem.CartDaoMem;
 import com.codecool.shop.dao.implementation.mem.ProductDaoMem;
 import com.codecool.shop.model.LineItem;
@@ -33,15 +31,22 @@ public class RemoveFromCartController extends HttpServlet {
         JsonObject jsonObject = gson.fromJson(JSONstring, JsonObject.class);
         int id = jsonObject.getAsJsonPrimitive("id").getAsInt();
         LineItem lineItem = cartDao.getLineItemByProductIdIfExists(id);
+        UserDao userDao = DaoFactory.getUserDao();
         if(lineItem != null) {
-            if(lineItem.getQuantity() > 1) {
-                lineItem.decreaseQuantity();
-            } else {
-                lineItem.decreaseQuantity();
-                cartDao.removeNullQuantityLineItems();
+            String daoType = DaoFactory.getDaoType();
+            if (daoType.equals("JDBC")){
+                LineItemDao lineItemDao = DaoFactory.getLineItemDao();
+                lineItemDao.decreaseQuantity(lineItem);
+            } else if (daoType.equals("MEM")){
+                if(lineItem.getQuantity() > 1) {
+                    lineItem.decreaseQuantity();
+                } else {
+                    lineItem.decreaseQuantity();
+                    cartDao.removeNullQuantityLineItems();
+                }
             }
         } else {
-            cartDao.add(new LineItem(productDao.find(id)));
+            cartDao.add(new LineItem(productDao.find(id), userDao.find(1)));
         }
 
         JsonObject jsonResponse = new JsonObject();

@@ -59,4 +59,17 @@ public final class DaoFactory {
         }
         return null;
     }
+
+    public static LineItemDao getLineItemDao() {
+        if (DAO_TYPE.equals("JDBC")){
+            return LineItemDaoJDBC.getInstance();
+        } else if(DAO_TYPE.equals("MEM")) {
+            return null;
+        }
+        return null;
+    }
+
+    public static String getDaoType() {
+        return DAO_TYPE;
+    }
 }

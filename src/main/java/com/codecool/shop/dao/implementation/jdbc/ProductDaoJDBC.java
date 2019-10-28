@@ -74,14 +74,10 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
             @Cleanup PreparedStatement statement = connection.prepareStatement("SELECT * FROM product WHERE supplier_id= ?");
             statement.setInt(1, supplier.getId());
             @Cleanup ResultSet resultSet = statement.executeQuery();
-            while (!resultSet.next()) {
-                String name = resultSet.getString("name");
-                Float defaultPrice = resultSet.getFloat("default_price");
-                String currencyString = resultSet.getString("default_currency");
-                String description = resultSet.getString("description");
-                ProductCategory productCategory = ProductCategoryDaoJDBC.getInstance().find(resultSet.getInt("product_category_id"));
-
-                Product product = new Product(name, defaultPrice, currencyString, description, productCategory, supplier);
+            ProductDao productDao = DaoFactory.getProductDao();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Product product = productDao.find(id);
                 result.add(product);
             }
             return result;
@@ -104,13 +100,6 @@ public class ProductDaoJDBC extends DaoJDBC implements ProductDao {
                 int id = resultSet.getInt("id");
                 Product product = productDao.find(id);
                 result.add(product);
-               /* String name = resultSet.getString("name");
-                Float defaultPrice = resultSet.getFloat("default_price");
-                String currencyString = resultSet.getString("default_currency");
-                String description = resultSet.getString("description");
-                Supplier supplier = new Supplier(resultSet.getString("name"), resultSet.getString("description"));
-                Product product = new Product(name, defaultPrice, currencyString, description, productCategory, supplier);
-                result.add(product);*/
             }
             return result;
         } catch (SQLException e) {

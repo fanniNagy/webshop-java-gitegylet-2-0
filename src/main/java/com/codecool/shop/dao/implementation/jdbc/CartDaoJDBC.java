@@ -1,11 +1,10 @@
 package com.codecool.shop.dao.implementation.jdbc;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DaoFactory;
-import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.model.*;
 import lombok.Cleanup;
 
+import javax.sound.sampled.Line;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,9 +72,12 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
             @Cleanup Connection conn = this.getConnection();
             @Cleanup PreparedStatement statement = conn.prepareStatement("SELECT * FROM line_item");
             @Cleanup ResultSet resultSet = statement.executeQuery();
+            LineItemDao lineItemDao = DaoFactory.getLineItemDao();
+            UserDao userDao = DaoFactory.getUserDao();
+            ProductDao productDao = DaoFactory.getProductDao();
             while(resultSet.next()){
                 int prodId = resultSet.getInt("product_id");
-                LineItem lineItem = new LineItem(pd.find(prodId));
+                LineItem lineItem = lineItemDao.find(userDao.find(1), productDao.find(prodId));
                 result.add(lineItem);
             }
         } catch (SQLException e) {
@@ -101,9 +103,13 @@ public class CartDaoJDBC extends DaoJDBC implements CartDao {
                 return null;
             } else {
                 Product product = ProductDaoJDBC.getInstance().find(productId);
-                LineItem lineItem = new LineItem(product);
+                UserDao userDao = DaoFactory.getUserDao();
+                LineItemDao lineItemDao = DaoFactory.getLineItemDao();
+                return lineItemDao.find(userDao.find(1), product);
+
+                /*LineItem lineItem = new LineItem(product, userDao.find(1));
                 lineItem.setQuantity(resultSet.getInt("quantity"));
-                return lineItem;
+                return lineItem;*/
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,24 +1,30 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.jdbc.LineItemQuantity;
-
-public class LineItem {
+public class LineItem extends BaseModel {
     private Product product;
     private int quantity;
+    private User user;
 
-    public LineItem(Product product) {
+    public LineItem(Product product, User user) {
+        super("LineItem" + product.getId());
         this.product = product;
+        this.user = user;
         this.quantity = 1;
+    }
+
+    public LineItem(Product product, int quantity, User user) {
+        super("LineItem" + product.getId());
+        this.product = product;
+        this.user = user;
+        this.quantity = quantity;
     }
 
     public void increaseQuantity() {
         this.quantity++;
-        LineItemQuantity.getInstance().increaseQuantity(product.id);
     }
 
     public void decreaseQuantity() {
         this.quantity--;
-        LineItemQuantity.getInstance().decreaseQuantity(product.id);
     }
 
     public Product getProduct() {

@@ -21,6 +21,7 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CartDao cartDao = DaoFactory.getCartDao();
+        UserDao userDao = DaoFactory.getUserDao();
         ProductDao productDao = DaoFactory.getProductDao();
 
         String JSONstring = req.getReader()
@@ -31,9 +32,15 @@ public class AddToCartController extends HttpServlet {
         int id = jsonObject.getAsJsonPrimitive("id").getAsInt();
         LineItem lineItem = cartDao.getLineItemByProductIdIfExists(id);
         if(lineItem != null) {
-            lineItem.increaseQuantity();
+            String daoType = DaoFactory.getDaoType();
+            if (daoType.equals("JDBC")){
+                LineItemDao lineItemDao = DaoFactory.getLineItemDao();
+                lineItemDao.increaseQuantity(lineItem);
+            } else if (daoType.equals("MEM")){
+                lineItem.increaseQuantity();
+            }
         } else {
-            cartDao.add(new LineItem(productDao.find(id)));
+            cartDao.add(new LineItem(productDao.find(id), userDao.find(1)));
         }
 
         JsonObject jsonResponse = new JsonObject();

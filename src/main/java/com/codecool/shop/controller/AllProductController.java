@@ -26,11 +26,6 @@ public class AllProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("categorymap", productCategoryDao.getProductCategoryMap());
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDao.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDao.find(1)));
-        // context.setVariables(params);
         engine.process("product/list.html", context, resp.getWriter());
     }
 }
