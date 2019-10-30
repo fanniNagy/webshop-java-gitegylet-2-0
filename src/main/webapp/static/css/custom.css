@@ -151,3 +151,17 @@ img {
 #total-price-wrapper{
     color: white;
 }
+
+h1{
+    font-family: 'Quintessential', cursive;
+}
+.category h3{
+    font-family: 'Walter Turncoat', cursive;
+
+}
+.container{
+    font-family: 'IM Fell Double Pica', serif;
+}
+.product-name{
+    font-family: 'Neucha', cursive;
+}
