@@ -114,5 +114,16 @@ img {
 }
 
 .product-name {
-    height: 110px;
+    height: 50px;
+}
+
+.price {
+    float: right;
+    margin: 0;
+}
+
+.quantity {
+    width: 50%;
+    float: left;
+    margin: 0;
 }

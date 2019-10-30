@@ -1,5 +1,6 @@
 function init() {
     add_event_listener();
+    update_total_price();
 }
 
 function add_event_listener() {
@@ -28,6 +29,7 @@ function handle_add_to_cart(event) {
             console.log(event.target);
 
             quantityDiv.innerHTML = (parseInt(quantityDiv.innerHTML) + 1).toString();
+            update_total_price();
         })
 }
 
@@ -49,8 +51,23 @@ function handle_remove_from_cart(event) {
             quantityDiv.closest(".card").parentElement
                 .parentElement.removeChild(quantityDiv.closest(".card").parentElement);
         }
+        update_total_price();
     })
     
+}
+
+function update_total_price() {
+    let products = document.querySelector("#products")
+    let line_items = products.querySelectorAll(".card");
+    let total = 0;
+    for (let line_item of line_items) {
+        let price = parseInt(line_item.dataset.price);
+        let quantity = parseInt(line_item.querySelector("#item-quantity").innerHTML);
+        total += price * quantity;
+    }
+
+    let total_price = document.querySelector("#total-price");
+    total_price.innerText = total + ' GAL';
 }
 
 window.onload = init;

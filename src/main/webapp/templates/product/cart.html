@@ -15,18 +15,15 @@
     <div class="card">
 
     </div>
-    <div class="card" >
-        <strong>Category Title</strong>
-    </div>
+    <h3 class="category_title" >Cart</h3>
 
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each=" lineItem : ${lineItemContainer}">
-            <div class="card card-of-product" th:object="${lineItem.product}" th:data-id="*{id}">
+            <div class="card card-of-product text-white bg-dark mb-3" th:object="${lineItem.product}" th:data-id="*{id}" th:data-price="${lineItem.getProduct().getPrice()}">
                 <img class="" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + *{id} + '.png'" alt=""/>
                 <div class="card-header">
-                    <h4 class="card-title" th:text="*{name}">Product name</h4>
-
+                    <h4 class="card-title product-name" th:text="*{name}">Product name</h4>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
@@ -40,13 +37,13 @@
                             </div>
 
                         </div>
-                        <p class="" th:text="*{getPrice()}"></p>
+                        <p class="price" th:text="*{getPrice()}"></p>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+    <h2>Total Price: <span id="total-price"></span></h2>
 </div>
 </body>
 </html>
