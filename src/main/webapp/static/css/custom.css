@@ -80,7 +80,10 @@
 }
 
 img {
+    object-fit: contain;
+
     width: 100%;
+    height: 300px;
 }
 
 #cart_button {
@@ -96,4 +99,8 @@ img {
 
 #all_button {
     float: right;
+}
+
+.category_title {
+    text-align: center;
 }

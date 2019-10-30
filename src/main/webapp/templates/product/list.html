@@ -12,14 +12,12 @@
         <a class="btn btn-success" th:href="@{/cart}"><span id="cart_size"></span><i class="fas fa-cart-arrow-down"></i></a>
     </div>
     <div class="category" id="category" th:each="categoryProducts :${categorymap}">
-        <div class="card">
-            <strong th:text="${categoryProducts.getKey().name}">Category Title</strong>
-        </div>
+        <h3 class="category_title" th:text="${categoryProducts.getKey().name}">Category Title</h3>
         <div id="products" class="row">
             <div class="col col-sm-12 col-md-6 col-lg-4"  th:each="product : ${categoryProducts.getValue()}">
-                <div class="card" th:object="${product}" th:data-id="${product.id}">
+                <div class="card text-white bg-dark mb-3" th:object="${product}" th:data-id="${product.id}">
                     <img class="" src="http://placehold.it/400x250/000/fff"
-                         th:attr="src='/static/img/product_' + *{id} + '.jpg'" alt=""/>
+                         th:attr="src='/static/img/product_' + *{id} + '.png'" alt=""/>
                     <div class="card-header">
                         <h4 class="card-title" th:text="*{name}">Product name</h4>
                         <p class="card-text" th:text="*{description}">Product description... </p>
