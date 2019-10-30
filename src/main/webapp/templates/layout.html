@@ -53,6 +53,9 @@
     <a href="/filter?filter-by=supplier&filter-value=2">Weasleys Wizard Wheezes</a>
     <a href="/filter?filter-by=supplier&filter-value=3">Death</a>
 </div>
+<div id="header">
+    <a href="/"><h1>Diagon Alley</h1></a>
+</div>
 
 <div>
     <h1>Diagon Alley</h1>
@@ -61,8 +64,5 @@
 <div class="container">
     <div th:include="this :: content"/>
 </div>
-
-<div th:replace="footer.html :: copy"></div>
-
 </body>
 </html>

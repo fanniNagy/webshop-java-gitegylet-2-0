@@ -1,6 +1,17 @@
 function init() {
     add_event_listener();
     update_total_price();
+    check_for_empty_cart();
+}
+
+function check_for_empty_cart() {
+    let products = document.querySelector("#products");
+    let line_items = products.querySelectorAll(".card");
+
+    if (line_items.length == 0) {
+        products.innerHTML = "<h2>Your Cart Is Empty :(</h2>";
+        document.querySelector("#total-price-wrapper").remove();
+    }
 }
 
 function add_event_listener() {
@@ -50,6 +61,7 @@ function handle_remove_from_cart(event) {
         } else {
             quantityDiv.closest(".card").parentElement
                 .parentElement.removeChild(quantityDiv.closest(".card").parentElement);
+            check_for_empty_cart();
         }
         update_total_price();
     })
@@ -57,7 +69,7 @@ function handle_remove_from_cart(event) {
 }
 
 function update_total_price() {
-    let products = document.querySelector("#products")
+    let products = document.querySelector("#products");
     let line_items = products.querySelectorAll(".card");
     let total = 0;
     for (let line_item of line_items) {
