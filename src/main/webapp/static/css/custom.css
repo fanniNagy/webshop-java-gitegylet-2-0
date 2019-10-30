@@ -10,16 +10,6 @@
     border-radius: 0px;
 }
 
-/*body {
-
-    background-image:
-            linear-gradient(to bottom, rgba(132, 132, 137, 0.31), rgba(12, 3, 8, 0.96)),
-            url('background.png') !important;
-
-    width: 100%;
-    height: 800px;
-    background-size: cover;
-}*/
 body {
     background-image:
             linear-gradient(rgba(132, 132, 137, 0.31), rgba(12, 3, 8, 0.96)),
@@ -114,6 +104,9 @@ img {
 
 .category_title {
     text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .description {
@@ -152,5 +145,9 @@ img {
 
 #header a {
     text-decoration: none;
-    color: black;
+    color: white;
+}
+
+#total-price-wrapper{
+    color: white;
 }
