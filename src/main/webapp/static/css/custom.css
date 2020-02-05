@@ -1,62 +1,167 @@
 .glyphicon {
-    margin-right:5px;
+    margin-right: 5px;
 }
-.thumbnail
-{
+
+.thumbnail {
     margin-bottom: 20px;
-    padding: 0px;
+    padding: 0;
     -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
+    -moz-border-radius: 0;
     border-radius: 0px;
 }
-.thumbnail img
-{
-    margin-top: 10px;
+
+body {
+    background-image:
+            linear-gradient(rgba(132, 132, 137, 0.31), rgba(12, 3, 8, 0.96)),
+            url('background.png') !important;
 }
-.item.list-group-item
-{
+
+
+.item.list-group-item {
     float: none;
     width: 100%;
     background-color: #fff;
     margin-bottom: 10px;
 }
-.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
-{
+
+.item.list-group-item:nth-of-type(odd):hover, .item.list-group-item:hover {
     background: #428bca;
 }
 
-.item.list-group-item .list-group-image
-{
+.item.list-group-item .list-group-image {
     margin-right: 10px;
 }
-.item.list-group-item .thumbnail
-{
+
+.item.list-group-item .thumbnail {
     margin-bottom: 0px;
 }
-.item.list-group-item .caption
-{
+
+.item.list-group-item .caption {
     padding: 9px 9px 0px 9px;
 }
-.item.list-group-item:nth-of-type(odd)
-{
+
+.item.list-group-item:nth-of-type(odd) {
     background: #eeeeee;
 }
 
-.item.list-group-item:before, .item.list-group-item:after
-{
+.item.list-group-item:before, .item.list-group-item:after {
     display: table;
     content: " ";
 }
 
-.item.list-group-item img
-{
+.item.list-group-item img {
     float: left;
 }
-.item.list-group-item:after
-{
+
+.item.list-group-item:after {
     clear: both;
 }
-.list-group-item-text
-{
+
+.list-group-item-text {
     margin: 0 0 11px;
+}
+
+/*sidenav*/
+#menu-opener {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#cart_size {
+    padding-right: 5px;
+}
+
+#cart_size {
+    padding-right: 5px;
+}
+
+.quantity div {
+    display: inline-block !important;
+}
+
+img {
+    object-fit: contain;
+
+    width: 100%;
+    height: 300px;
+}
+
+#cart_button {
+    padding-left: 10px;
+    margin: 5px;
+}
+
+#category {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 0;
+}
+
+#all_button {
+    float: right;
+}
+
+.category_title {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+    max-height: 100%;
+}
+
+.product-name {
+    height: 50px;
+}
+
+.price {
+    float: right;
+    margin: 0;
+}
+
+.quantity {
+    width: 50%;
+    float: left;
+    margin: 0;
+}
+#products h2 {
+    text-align: center;
+    width: 100%;
+}
+
+#header {
+    text-align: center;
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+#header a {
+    text-decoration: none;
+    color: white;
+}
+
+#total-price-wrapper{
+    color: white;
+}
+
+h1{
+    font-family: 'Quintessential', cursive;
+}
+.category h3{
+    font-family: 'Walter Turncoat', cursive;
+
+}
+.container{
+    font-family: 'IM Fell Double Pica', serif;
+}
+.product-name{
+    font-family: 'Neucha', cursive;
 }

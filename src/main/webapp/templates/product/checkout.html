@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout.html :: page">
+<head>
+    <title>Your...</title>
+</head>
+<body>
+<div th:fragment="content">
+    <form>
+        <p>First name:</p>
+        <input type="text" name="firstname" required>
+        <p>Last name:</p>
+        <input type="text" name="lastname" required>
+        <p>E-mail:</p>
+        <input type="email" name="email" required>
+        <p>Phone number:</p>
+        <input type="text" name="phonenumber" required>
+        <p>Billing adress:</p>
+        <input type="text" name="country" placeholder="Country" required>
+        <input type="text" name="city" placeholder="City" required>
+        <input type="text" name="zipcode" placeholder="Zipcode" required>
+        <input type="text" name="street" placeholder="Street" required>
+        <input type="text" name="building" placeholder="Building" required>
+        <p>My shipping adress is the same as the billing adress</p>
+        <input type="checkbox" name="sameadresses">
+        <p>Shipping adress:</p>
+        <input type="text" name="country" placeholder="Country">
+        <input type="text" name="city" placeholder="City">
+        <input type="text" name="zipcode" placeholder="Zipcode">
+        <input type="text" name="street" placeholder="Street">
+        <input type="text" name="building" placeholder="Building">
+        <input type="submit" name="submit">
+    </form>
+</div>
+</body>
+</html>
+
+
+
+

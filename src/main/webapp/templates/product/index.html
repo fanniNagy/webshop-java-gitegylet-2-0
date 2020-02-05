@@ -7,24 +7,21 @@
 </head>
 <body>
 <div th:fragment="content">
-    <div class="icons">
-        <a class="btn btn-success" th:href="@{/cart}"><i class="fas fa-shopping-cart"></i></a>
-    </div>
-    <div class="card">
-        <a th:href="@{/list}"> See all products</a>
-    </div>
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+    <script defer type="text/javascript" src="static/js/add-to-cart.js"></script>
+    <a id="cart_button"  class="btn btn-success" th:href="@{/cart}"><span id="cart_size"></span><i class="fas fa-shopping-basket"></i></a>
+    <a id="all_button" class="btn btn-success" th:href="@{/list}"><i class="fas fa-reply-all"></i></a>
 
+<!--    <div class="card" id="category">
+        <strong th:text="${category.name}">Category Title</strong>
+    </div>-->
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
+            <div class="card text-white bg-dark mb-3" th:data-id="${prod.id}">
                 <img class="" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                     th:attr="src='/static/img/product_' + ${prod.id} + '.png'" alt=""/>
                 <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+                    <h4 class="card-title product-name" th:text="${prod.name}">Product name</h4>
+                    <p class="card-text description" th:text="${prod.description}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-text">

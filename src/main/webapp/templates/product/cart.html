@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="layout.html :: page">
 <head>
-    <meta charset="UTF-8">
-    <title>Your cart</title>
+    <title>Your Cart</title>
 </head>
 <body>
+<div th:fragment="content">
+    <style>
+        body{
+            height: 100vh !important;
+        }
+    </style>
+    <script defer type="text/javascript" src="static/js/cart.js"></script>
+    <div class="icons">
+        <a class="btn btn-primary" th:href="@{/}"><i class="fas fa-home"></i></a>
+        <a class="btn btn-secondary" th:href="@{/list}"> Continue browsing</a>
+    </div>
+    <div class="card">
 
+    </div>
+    <h3 class="category_title" >Cart</h3>
+
+    <div id="products" class="row">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each=" lineItem : ${lineItemContainer}">
+            <div class="card card-of-product text-white bg-dark mb-3" th:object="${lineItem.product}" th:data-id="*{id}" th:data-price="${lineItem.getProduct().getPrice()}">
+                <img class="" src="http://placehold.it/400x250/000/fff"
+                     th:attr="src='/static/img/product_' + *{id} + '.png'" alt=""/>
+                <div class="card-header">
+                    <h4 class="card-title product-name" th:text="*{name}">Product name</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        <div class="quantity" >
+                            <div>
+                                <i class="fas btn fa-minus-square decreaseQuantity"></i>
+                            </div>
+                            <div id="item-quantity" th:text="${lineItem.quantity}">0</div>
+                            <div>
+                                <i class="fas btn fa-plus-square increaseQuantity"></i>
+                            </div>
+
+                        </div>
+                        <p class="price" th:text="*{getPrice()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 id="total-price-wrapper">Total Price: <span id="total-price"></span></h2>
+</div>
 </body>
 </html>

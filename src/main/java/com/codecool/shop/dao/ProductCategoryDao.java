@@ -13,6 +13,6 @@ public interface ProductCategoryDao {
     void remove(int id);
 
     List<ProductCategory> getAll();
-    public HashMap<ProductCategory, List<Product>> getProductCategoryMap ();
+    HashMap<ProductCategory, List<Product>> getProductCategoryMap();
 
 }

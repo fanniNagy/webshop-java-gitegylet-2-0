@@ -44,6 +44,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
+                    <httpConnector>
+                        <port>8888</port>
+                    </httpConnector>
                     <!-- On some configs this causes shutdown of context on -->
                     <!-- a page load so disabled. -->
                     <!-- <reload>automatic</reload> -->
@@ -70,6 +73,28 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
             <version>3.0.9.RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
         </dependency>
     </dependencies>
 </project>
